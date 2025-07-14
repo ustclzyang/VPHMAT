@@ -1,0 +1,47 @@
+ &CONTROL
+    calculation = 'scf'
+    prefix = 'graphene'
+    outdir = './'
+    pseudo_dir = '/public/home/yanglz/QE/ONCVPSP-master/abinit'
+    ! tprnfor = .true.
+    ! tstress = .true.
+    restart_mode = 'from_scratch'
+ /
+ &SYSTEM
+    ibrav = 0           !Bravais-lattice index
+    nat = 2             !number of atoms
+    ntyp = 1            !number of types of atoms
+    ecutwfc = 50
+    ! ecutrho = 320
+    ! vdw_corr = 'DFT-D3'
+    ! nbnd = 34            !for insulators, nbnd = number of valence bands
+    occupations = 'tetrahedra_opt'
+    ! smearing = 'cold'
+    ! degauss = 0.02
+    ! noncolin = .true.
+    ! lspinorb = .true.
+    ! assume_isolated = '2D'
+ /
+ &ELECTRONS
+    conv_thr = 1.0e-11
+    mixing_beta = 0.3
+    diagonalization = 'david'
+    diago_david_ndim = 4
+    diago_full_acc = .true.
+ /
+
+ATOMIC_SPECIES
+C 12.0106 C_ONCV_PBE_sr.upf
+
+
+
+K_POINTS AUTOMATIC
+10 10 1 0 0 0
+CELL_PARAMETERS (angstrom)
+   2.444063673   0.000000000   0.000000000
+  -1.222031837   2.116621229   0.000000000
+   0.000000000   0.000000000   8.000000000
+
+ATOMIC_POSITIONS (crystal)
+C                0.3333333333        0.6666666667        0.0000000000
+C                0.6666666667        0.3333333333        0.0000000000
