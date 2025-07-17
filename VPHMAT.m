@@ -326,7 +326,7 @@ classdef VPHMAT < handle
             cx=cx(:);
             cy=cy(:);
             cz=cz(:);
-            tautmp=repmat(this.qe.at\this.qe.tau,[1 27]); % direct
+            tautmp=repmat((this.qe.alat*this.qe.at)\this.qe.tau,[1 27]); % direct
             iatmp=repmat(1:this.qe.nat,[1 27]);
             Rtmp=repelem([cx cy cz].',1,this.qe.nat);
             tautmp=tautmp+Rtmp;
