@@ -469,13 +469,14 @@ classdef VPHMAT < handle
             plotCell(this);
             axis equal
             axis off
-            if isempty(this.light) || ~isvalid(this.light)
+            this.ax=gca;
+            % if isempty(this.light) || ~isvalid(this.light)
+            if isempty(findobj(this.ax, 'Type', 'light'))
                 this.light = light;
                 this.light.Color = [1 1 1];
                 this.light.Position = [1 0 1];
                 lighting GOURAUD
-            end
-            this.ax=gca;
+            end            
             this.view=[70 30];
         end
 
