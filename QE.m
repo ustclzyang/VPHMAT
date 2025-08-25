@@ -162,7 +162,7 @@ classdef QE < handle
             b1=str2num(s.output.basis_set.reciprocal_lattice.b1);
             b2=str2num(s.output.basis_set.reciprocal_lattice.b2);
             b3=str2num(s.output.basis_set.reciprocal_lattice.b3);
-            qe.bg=[b1;b2;b3]; % reciprocal lattice, tpiba
+            qe.bg=[b1;b2;b3].'; % reciprocal lattice, tpiba
             qe.atm=cellstr([s.input.atomic_species.species.nameAttribute])';
             qe.amass=[s.input.atomic_species.species.mass].';
             qe.prefix=s.input.control_variables.prefix;
@@ -234,4 +234,5 @@ classdef QE < handle
             end
         end
     end
+
 end
