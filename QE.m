@@ -71,6 +71,7 @@ classdef QE < handle
         if_pos             % whether position is fixed (3×nat, logical)
         fileType = "qe"    % file type
         poscarData         % original POSCAR unpacked struct
+        zv
     end
 
     methods(Static)
@@ -234,5 +235,5 @@ classdef QE < handle
             end
         end
     end
-
 end
+
