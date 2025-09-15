@@ -208,13 +208,7 @@ classdef VPHMAT < handle
         function bonds=initBonds(this)
             % Reference: https://chemistry-europe.onlinelibrary.wiley.com/doi/10.1002/chem.200800987
 
-            % in the unit cell --------------------------------
-            bondind=nchoosek(1:this.data.nat,2);
-            bondindn=size(bondind,1);
-            tmp=zeros(bondindn,7);
-            tmp(:,1:2)=bondind;                 % all posible atom indices that form bonds
-            tmp(:,3:4)=this.data.atnum(bondind); % two chemical componds (atomic number) that form bonds
-            tmp(:,5)=vecnorm(this.data.tau(:,tmp(:,1))-this.data.tau(:,tmp(:,2))).'; % bond length, bohr
+
             % Reference: https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)
             % Covalent (single bond) in pm units
             bonds.radiiType='wikipedia';
@@ -228,7 +222,7 @@ classdef VPHMAT < handle
             coval(isnan(coval))=120;
             bonds.radii=coval/100; % in \AA units
 
-            % Determine critical bond length
+            % Determine critical bond length                                
             filename = fullfile('config', 'bondlengthdic.mat');
             if exist(filename, 'file')
                 S = load(filename, 'bondlengthdic');
@@ -245,13 +239,25 @@ classdef VPHMAT < handle
                 bondlengthdic=bonds.radii+bonds.radii.';
                 save(filename, 'bondlengthdic');
             end
-            for i = 1:bondindn
-                tmp(i,6) = bondlengthdic(tmp(i,3),tmp(i,4)); % corresponding critical bond length
-            end
-            % tmp(:,6)=bonds.radii(tmp(:,3))+bonds.radii(tmp(:,4)); % bond length=radii(Z1) + radii(Z2) + delta
+            % in the unit cell --------------------------------
+            if this.data.nat>1
+                bondind=nchoosek(1:this.data.nat,2);
+                bondindn=size(bondind,1);
+                tmp=zeros(bondindn,7);
+                tmp(:,1:2)=bondind;                 % all posible atom indices that form bonds
+                tmp(:,3:4)=this.data.atnum(bondind); % two chemical componds (atomic number) that form bonds
+                tmp(:,5)=vecnorm(this.data.tau(:,tmp(:,1))-this.data.tau(:,tmp(:,2))).'; % bond length, bohr
 
-            tmp(:,7)=tmp(:,6)>tmp(:,5); % determin whether to plot this bond
-            bonds.unitcell=tmp;
+                for i = 1:bondindn
+                    tmp(i,6) = bondlengthdic(tmp(i,3),tmp(i,4)); % corresponding critical bond length
+                end
+                % tmp(:,6)=bonds.radii(tmp(:,3))+bonds.radii(tmp(:,4)); % bond length=radii(Z1) + radii(Z2) + delta
+
+                tmp(:,7)=tmp(:,6)>tmp(:,5); % determin whether to plot this bond
+                bonds.unitcell=tmp;
+            else
+                bonds.unitcell=[];
+            end
 
             % in the nearby cells --------------------------------
             [cx,cy,cz]=meshgrid(-1:1);
@@ -275,12 +281,16 @@ classdef VPHMAT < handle
             end
             bonds.nearcell=tmp; % nothing to do with plot style, but depends on bond length
 
-            formedindex=bonds.unitcell(bonds.unitcell(:,7)==1,1:2);
-            formed=zeros(size(formedindex,1),10); % ia, ib, ia's cord, ib's cord, ia's meshgrid, ib's meshgrid
-            formed(:,1:2)=formedindex;
-            formed(:,3:5)=this.data.tau(:,formed(:,1)).';
-            formed(:,6:8)=this.data.tau(:,formed(:,2)).';
-            formed(:,9:10)=centerind;
+            if this.data.nat>1
+                formedindex=bonds.unitcell(bonds.unitcell(:,7)==1,1:2);
+                formed=zeros(size(formedindex,1),10); % ia, ib, ia's cord, ib's cord, ia's meshgrid, ib's meshgrid
+                formed(:,1:2)=formedindex;
+                formed(:,3:5)=this.data.tau(:,formed(:,1)).';
+                formed(:,6:8)=this.data.tau(:,formed(:,2)).';
+                formed(:,9:10)=centerind;
+            else
+                formed=[];
+            end
 
             switch this.boundary
                 case 'none'
@@ -354,13 +364,6 @@ classdef VPHMAT < handle
         end
 
         function changeBondsFromAtoms(this)
-            bondind=nchoosek(1:this.atoms.nat,2);
-            bondindn=size(bondind,1);
-            tmp=zeros(bondindn,7);
-            tmp(:,1:2)=bondind;                 % all posible atom indices that form bonds
-            tmp(:,3:4)=this.atoms.atnum(bondind); % two chemical componds (atomic number) that form bonds
-            tmp(:,5)=vecnorm(this.atoms.tau(:,tmp(:,1))-this.atoms.tau(:,tmp(:,2))).'; % bond length, bohr
-
             % Determine critical bond length
             filename = fullfile('config', 'bondlengthdic.mat');
             if exist(filename, 'file')
@@ -370,18 +373,30 @@ classdef VPHMAT < handle
                 error('VPHMAT:OpenFileError', ...
                     '%s does not exist', filename);
             end
-            for i = 1:bondindn
-                tmp(i,6) = bondlengthdic(tmp(i,3),tmp(i,4)); % corresponding critical bond length
-            end
-            tmp(:,7)=tmp(:,6)>tmp(:,5);
 
-            formedindex=tmp(tmp(:,7)==1,1:2);
-            formed=zeros(size(formedindex,1),10); % ia, ib, ia's cord, ib's cord, ia's meshgrid, ib's meshgrid
-            formed(:,1:2)=formedindex;
-            formed(:,3:5)=this.atoms.tau(:,formed(:,1)).';
-            formed(:,6:8)=this.atoms.tau(:,formed(:,2)).';
-            formed(:,9:10)=0;
-            this.bonds.formed=formed;
+            if this.atoms.nat>1
+                bondind=nchoosek(1:this.atoms.nat,2);
+                bondindn=size(bondind,1);
+                tmp=zeros(bondindn,7);
+                tmp(:,1:2)=bondind;                 % all posible atom indices that form bonds
+                tmp(:,3:4)=this.atoms.atnum(bondind); % two chemical componds (atomic number) that form bonds
+                tmp(:,5)=vecnorm(this.atoms.tau(:,tmp(:,1))-this.atoms.tau(:,tmp(:,2))).'; % bond length, bohr
+
+                for i = 1:bondindn
+                    tmp(i,6) = bondlengthdic(tmp(i,3),tmp(i,4)); % corresponding critical bond length
+                end
+                tmp(:,7)=tmp(:,6)>tmp(:,5);
+
+                formedindex=tmp(tmp(:,7)==1,1:2);
+                formed=zeros(size(formedindex,1),10); % ia, ib, ia's cord, ib's cord, ia's meshgrid, ib's meshgrid
+                formed(:,1:2)=formedindex;
+                formed(:,3:5)=this.atoms.tau(:,formed(:,1)).';
+                formed(:,6:8)=this.atoms.tau(:,formed(:,2)).';
+                formed(:,9:10)=0;
+                this.bonds.formed=formed;
+            else
+                this.bonds.formed=[];
+            end
         end
 
         function atoms=initAtoms(this)
