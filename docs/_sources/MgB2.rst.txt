@@ -1,0 +1,103 @@
+MgB₂
+===========================================
+
+This tutorial demonstrates how to plot band structure and density of states (DOS) from Quantum ESPRESSO output files using MgB₂ as an example.
+
+Prerequisites
+-------------
+
+Required Quantum ESPRESSO output files:
+
+* `prefix.xml` - XML output file containing Fermi energy (``pw.x`` output)
+* `bands.dat` - Band structure data file (``bands.x`` output)
+* `proj.dat.projwfc_up` - Projection data file for spin up (``projwfc.x`` output)
+* `prefix.dos` - Density of states data file (``dos.x`` output)
+* `prefix.pdos_tot` - Density of states data file (``projwfc.x`` output)
+* `prefix.pdos_atm#*(*)_wfc#*(*)` - Density of states data file (``projwfc.x`` output)
+
+Band Structure Plot
+-------------------------
+
+Plot the basic band structure of MgB₂:
+
+.. code-block:: matlab
+
+   bands=BANDS('examples/MgB2/bands.dat');
+   bands.fermi_energy=BANDS.readfermienergy('examples/MgB2/MgB2.xml');
+   bands.klabels={"\Gamma","M","K","\Gamma","A","L","H","A","L","M","H","K"};
+   figure
+   bands.plot
+   ylim([-15 15])
+   yline(0,'--')
+   for i=1:size(bands.hLines,1)
+       bands.hLines(i).LineWidth=1.5;
+   end
+   set(gca,'FontSize',12);
+
+.. figure:: /_static/images/MgB2_band.png
+   :alt: Band structure for MgB2
+   :width: 500px
+   :align: center
+
+   Band structure
+
+
+Fat Band Plot
+-------------
+
+Plot the fat band structure of MgB₂:
+
+.. code-block:: matlab
+
+   bands=BANDS('examples/MgB2/bands.dat','examples/MgB2/proj.dat.projwfc_up');
+   bands.fermi_energy=BANDS.readfermienergy('examples/MgB2/MgB2.xml');
+   bands.klabels={"\Gamma","M","K","\Gamma","A","L","H","A","L","M","H","K"};
+   figure
+   bands.plot('Mg s B py B pz')
+   ylim([-15 15])
+   yline(0,'--','DisplayName','Fermi')
+   legend
+   set(gca,'FontSize',12);
+
+.. figure:: /_static/images/MgB2_fatband.png
+   :alt: Fat band structure for MgB2
+   :width: 500px
+   :align: center
+
+   Fat band structure
+
+
+Fat DOS Plot
+------------
+.. code-block:: matlab
+
+   % "filproj".projwfc_up is only used for generating nlmchi （this file can be the same with fat band plot)
+   % then we search "filpdos".pdos_atm#N(X)_wfc#M(l) according to nlmchi
+   pdos=DOS('examples/MgB2/proj.dat.projwfc_up','MgB2');
+   pdos.fermi_energy=BANDS.readfermienergy('examples/MgB2/MgB2.xml');
+   % plot fat dos
+   pdos.plot('Mg s B py B pz')
+   for i=1:size(pdos.hLines,1)
+       pdos.hLines(i).LineWidth=1.5;
+   end
+   % plot total dos
+   pdos.plot
+   for i=1:size(pdos.hLines,1)
+       pdos.hLines(i).LineWidth=1.5;
+       pdos.hLines(i).Color='k';
+   end
+   xlim([0 2])
+   ylim([-15 15])
+   yline(0,'--','DisplayName','Fermi')
+   set(gca,'FontSize',12);
+   legend
+
+.. figure:: /_static/images/MgB2_fatdos.png
+   :alt: Fat DOS for MgB2
+   :width: 500px
+   :align: center
+
+   Fat DOS
+
+
+

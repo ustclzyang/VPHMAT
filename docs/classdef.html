@@ -1,0 +1,360 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Classdef &mdash; VPHMAT 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=9acbadd1"></script>
+      <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Tutorials" href="tutorials.html" />
+    <link rel="prev" title="Documentation" href="Documentation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            VPHMAT
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">PROJECT</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="About.html">About</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="Documentation.html">Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Classdef</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#vphmat">VPHMAT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#qe">QE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nist">NIST</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bands">BANDS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dos">DOS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vasp">VASP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fermisurfer">FermiSurfer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#matdyn">MATDYN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wan">WAN</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Acknowledgements.html">Acknowledgements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Contact.html">Contact</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">SOURCE CODE</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="DownloadAndInstall.html">Download and Install</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/ustclzyang/VPHMAT">GitHub</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">VPHMAT</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="Documentation.html">Documentation</a></li>
+      <li class="breadcrumb-item active">Classdef</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/classdef.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="classdef">
+<h1>Classdef<a class="headerlink" href="#classdef" title="Link to this heading"></a></h1>
+<p>VPHMAT is an object-oriented MATLAB package where all functionality is implemented through classes.</p>
+<section id="vphmat">
+<h2>VPHMAT<a class="headerlink" href="#vphmat" title="Link to this heading"></a></h2>
+<p>Main class for visualizing crystal structures and phonon modes.</p>
+<p><strong>Methods:</strong></p>
+<p><strong>Instance Methods:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">VPHMAT(qe)</span></code> - Constructor for visualizing QE crystal structures</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plot()</span></code> - Display atomic structure with atoms, bonds, and unit cell</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">animate()</span></code> - Interactive phonon mode visualization and animation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plotBonds()</span></code>, <code class="docutils literal notranslate"><span class="pre">plotAtoms()</span></code>, <code class="docutils literal notranslate"><span class="pre">plotCell()</span></code> - Individual component plotting</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">initBonds()</span></code>, <code class="docutils literal notranslate"><span class="pre">initAtoms()</span></code> - Initialize bond and atom data</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">onStyleChanged()</span></code>, <code class="docutils literal notranslate"><span class="pre">onViewChanged()</span></code> - Event handlers for UI changes</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tAtomsTau()</span></code> - Transform atomic positions for phonon animation</p></li>
+</ul>
+</section>
+<section id="qe">
+<h2>QE<a class="headerlink" href="#qe" title="Link to this heading"></a></h2>
+<p>Parse and store Quantum ESPRESSO structure data.</p>
+<p><strong>Properties:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">prefix</span></code> - System prefix or comment (from POSCAR line 1 or QE input)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">alat</span></code> - Lattice constant in Bohr</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">at</span></code> - 3×3 lattice vectors (columns: a1, a2, a3, unit: alat)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tpiba</span></code> - 2π/alat</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bg</span></code> - 3×3 reciprocal lattice vectors (columns: b1, b2, b3, unit: tpiba)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">atm</span></code> - Names of atomic species (cell array)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">amass</span></code> - Mass of atomic species</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">atnum</span></code> - Atomic number of each atom</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">na</span></code> - Number of atoms of each species</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nat</span></code> - Total number of atoms</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ityp</span></code> - Species index for each atom (1…nsp)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tau</span></code> - 3×nat atomic positions (Bohr)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">if_pos</span></code> - 3×nat logical array indicating fixed atomic coordinates</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fileType</span></code> - File type: ‘qe’ (default) or ‘vasp’ (if from POSCAR)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">poscarData</span></code> - Original POSCAR data as unpacked struct (if from POSCAR)</p></li>
+</ul>
+<p><strong>Methods:</strong></p>
+<p><strong>Static Methods:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">fromPOSCAR(filePath)</span></code> - Read VASP POSCAR file and construct QE object</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fromXML(filePath)</span></code> - Read Quantum ESPRESSO XML output file</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fromCIF(filePath)</span></code> - Read CIF file format</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_atomic_number(symbols)</span></code> - Convert element symbols to atomic numbers</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_atomic_sym(atnum)</span></code> - Convert atomic numbers to element symbols</p></li>
+</ul>
+<p><strong>Instance Methods:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">exportPOSCAR(filePath)</span></code>, <code class="docutils literal notranslate"><span class="pre">exportCIF(filePath)</span></code> - Export to file formats</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pwinput(kpr)</span></code>, <code class="docutils literal notranslate"><span class="pre">cp2kinput()</span></code> - Generate input files for other codes</p></li>
+</ul>
+</section>
+<section id="nist">
+<h2>NIST<a class="headerlink" href="#nist" title="Link to this heading"></a></h2>
+<p>Fundamental physical constants downloaded from <a class="reference external" href="https://physics.nist.gov/cuu/Constants/">NIST</a>.</p>
+<p><strong>Methods:</strong></p>
+<p><strong>Static Methods:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">convertunit(dataunit,</span> <span class="pre">unit)</span></code> - Convert between energy units (meV, eV, Ry, THz, cm⁻¹)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">initconvmat()</span></code> - Initialize unit conversion matrix</p></li>
+</ul>
+<p><strong>Properties (Constants):</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">elementary_charge</span></code>, <code class="docutils literal notranslate"><span class="pre">electron_mass</span></code>, <code class="docutils literal notranslate"><span class="pre">Planck_constant</span></code> - Fundamental constants</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Bohr_radius</span></code>, <code class="docutils literal notranslate"><span class="pre">Hartree_energy</span></code>, <code class="docutils literal notranslate"><span class="pre">Rydberg_constant</span></code> - Atomic units</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">speed_of_light</span></code>, <code class="docutils literal notranslate"><span class="pre">Boltzmann_constant</span></code> - Physical constants</p></li>
+</ul>
+</section>
+<section id="bands">
+<h2>BANDS<a class="headerlink" href="#bands" title="Link to this heading"></a></h2>
+<p>Plot band structure from Quantum ESPRESSO bands.x and projwfc.x outputs.</p>
+<p><strong>Methods:</strong></p>
+<p><strong>Instance Methods:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">BANDS(filband,</span> <span class="pre">filproj)</span></code> - Constructor with band and projection files</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plot(orbname)</span></code> - Plot band structure with orbital projections</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plot_tiledlayout(orbname,</span> <span class="pre">mylim)</span></code> - Tiled layout band plotting</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">wan(bandidx)</span></code> - Wannier and EPW projections</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">readfilband(filePath)</span></code> - Read band structure data</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">readfilproj(filePath)</span></code> - Read projection data</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plotband()</span></code>, <code class="docutils literal notranslate"><span class="pre">plotfatband()</span></code> - Band structure plotting functions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">orbname2ind()</span></code> - Convert orbital names to indices</p></li>
+</ul>
+</section>
+<section id="dos">
+<h2>DOS<a class="headerlink" href="#dos" title="Link to this heading"></a></h2>
+<p>Parse and plot density of states (DOS) from Quantum ESPRESSO projwfc.x outputs.</p>
+<p><strong>Properties:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">qe</span></code> - QE object containing crystal structure information</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fermi_energy</span></code> - Fermi energy in Hartree</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nlmchi</span></code> - Atomic wavefunction information (n, l, m, chi)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pdos</span></code> - ne×natomwfc projected density of states</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dostot</span></code> - ne×1 total density of states</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pdostot</span></code> - ne×1 total projected density of states</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">et</span></code> - Energy values in eV</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ax</span></code> - Plot axes handle</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hLines</span></code> - Plot line handles</p></li>
+</ul>
+<p><strong>Methods:</strong></p>
+<p><strong>Instance Methods:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">DOS(filproj,</span> <span class="pre">filpdos)</span></code> - Constructor reading projwfc.x output files</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plot(orbname)</span></code> - Plot DOS with optional orbital projections</p></li>
+</ul>
+<p><strong>Static Methods:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">readfildos(filePath)</span></code> - Read total DOS from prefix.dos file</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plotfildos(filePath,</span> <span class="pre">plotintdos)</span></code> - Plot total DOS from file</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">readfilpdos(filePath)</span></code> - Read projected DOS from pdos_atm files</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plotdostot(et,</span> <span class="pre">pdostot,</span> <span class="pre">fermi_energy)</span></code> - Plot total DOS</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plotpdos(et,</span> <span class="pre">pdos,</span> <span class="pre">fermi_energy,</span> <span class="pre">nlmchi_ind,</span> <span class="pre">nlmchi_label)</span></code> - Plot projected DOS</p></li>
+</ul>
+<p><strong>Usage Example:</strong></p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Read DOS data from projwfc.x outputs</span>
+<span class="nb">dos</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">DOS</span><span class="p">(</span><span class="s">&#39;prefix.projwfc_up&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;prefix&#39;</span><span class="p">);</span>
+
+<span class="c">% Plot total DOS</span>
+<span class="nb">dos</span><span class="p">.</span><span class="n">plot</span><span class="p">();</span>
+
+<span class="c">% Plot projected DOS for specific orbitals</span>
+<span class="nb">dos</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="s">&#39;Si s Si px Si py Si pz Si dx2-y2&#39;</span><span class="p">);</span>
+
+<span class="c">% Plot using atom and orbital notation</span>
+<span class="nb">dos</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="s">&#39;Si 3 s Si 3 px Si 3 py Si 3 pz Si 3 dx2-y2&#39;</span><span class="p">);</span>
+
+<span class="c">% Plot using n+capital notation for orbital types</span>
+<span class="nb">dos</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="s">&#39;Si 3S Si 3P Si 3D&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="vasp">
+<h2>VASP<a class="headerlink" href="#vasp" title="Link to this heading"></a></h2>
+<p>Parse and store VASP data from various output files.</p>
+<p><strong>Methods:</strong></p>
+<p><strong>Static Methods:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">banddir(folderPath)</span></code>, <code class="docutils literal notranslate"><span class="pre">scfdir(folderPath)</span></code> - Read VASP calculation directories</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dosdir(folderPath)</span></code>, <code class="docutils literal notranslate"><span class="pre">dos_socdir(folderPath)</span></code> - Read DOS data</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">readBANDdat()</span></code>, <code class="docutils literal notranslate"><span class="pre">readKLABELS()</span></code>, <code class="docutils literal notranslate"><span class="pre">readKPATHin()</span></code> - Parse band structure files</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">readDOSCAR()</span></code>, <code class="docutils literal notranslate"><span class="pre">readPROCAR()</span></code>, <code class="docutils literal notranslate"><span class="pre">readCHGCAR()</span></code> - Parse various VASP outputs</p></li>
+</ul>
+<p><strong>Instance Methods:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">plot()</span></code> - Main plotting function for bands and DOS</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plotband()</span></code>, <code class="docutils literal notranslate"><span class="pre">plotfatband()</span></code>, <code class="docutils literal notranslate"><span class="pre">plotTDOS()</span></code> - Specific plotting functions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plotCHGCAR()</span></code>, <code class="docutils literal notranslate"><span class="pre">plotELFCAR()</span></code> - Charge density visualization</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sliceCHGCAR()</span></code>, <code class="docutils literal notranslate"><span class="pre">sliceELFCAR()</span></code> - 2D slice visualization</p></li>
+</ul>
+</section>
+<section id="fermisurfer">
+<h2>FermiSurfer<a class="headerlink" href="#fermisurfer" title="Link to this heading"></a></h2>
+<p>A MATLAB adaptation of the open-source <a class="reference external" href="https://github.com/mitsuaki1987/fermisurfer">FermiSurfer package</a>.</p>
+<p><strong>Methods:</strong></p>
+<p><strong>Instance Methods:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">FermiSurfer(filePath)</span></code> - Constructor reading FermiSurfer data file</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plot()</span></code> - Visualize Fermi surfaces</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">readfermisurfer(filePath)</span></code> - Read Fermi surface data</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plotfermisurfer()</span></code>, <code class="docutils literal notranslate"><span class="pre">plotfermisurferfbz()</span></code> - Fermi surface plotting</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plotfermisurfer2d()</span></code>, <code class="docutils literal notranslate"><span class="pre">plotfermisurferfbz2d()</span></code> - 2D Fermi surface plotting</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bragg_vector()</span></code>, <code class="docutils literal notranslate"><span class="pre">bragg_vert()</span></code> - Brillouin zone boundary calculations</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">interpol_energy()</span></code> - Energy interpolation for smooth surfaces</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">onInterpolChanged()</span></code> - Interpolation parameter change handler</p></li>
+</ul>
+</section>
+<section id="matdyn">
+<h2>MATDYN<a class="headerlink" href="#matdyn" title="Link to this heading"></a></h2>
+<p>Parse and store Quantum ESPRESSO matdyn.f90 phonon dispersion data.</p>
+<p><strong>Properties:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">nat</span></code> - Number of atoms</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nq</span></code> - Number of q-points</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">q</span></code> - 3×nq q-point coordinates in tpiba units</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">freq</span></code> - nat3×nq phonon frequencies in Ry</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">freq_thz</span></code> - nat3×nq phonon frequencies in THz</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">freq_cmm1</span></code> - nat3×nq phonon frequencies in cm⁻¹</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">unit</span></code> - Frequency unit (‘ry’, ‘thz’, ‘cmm1’)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">klabels</span></code> - High symmetry point labels</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">eigvec</span></code> - Phonon eigenvectors</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">z</span></code> - Normalized phonon displacement vectors</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ax</span></code> - Phonon dispersion plot axes handle</p></li>
+</ul>
+<p><strong>Methods:</strong></p>
+<p><strong>Instance Methods:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">MATDYN(flvec)</span></code> - Constructor reading matdyn.modes file</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plot(atnum,</span> <span class="pre">atom_direc)</span></code> - Plot phonon dispersion with optional atom-projected fat bands</p></li>
+</ul>
+<p><strong>Static Methods:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">plotband(q,</span> <span class="pre">freq,</span> <span class="pre">klabels)</span></code> - Plot phonon dispersion bands</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plotfatband(q,</span> <span class="pre">freq,</span> <span class="pre">klabels,</span> <span class="pre">z,</span> <span class="pre">ind,</span> <span class="pre">ind_label)</span></code> - Plot atom-projected phonon fat bands</p></li>
+</ul>
+<p><strong>Usage Example:</strong></p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Read phonon dispersion data</span>
+<span class="n">matdyn</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">MATDYN</span><span class="p">(</span><span class="s">&#39;matdyn.modes&#39;</span><span class="p">);</span>
+
+<span class="c">% Plot basic phonon dispersion</span>
+<span class="n">matdyn</span><span class="p">.</span><span class="n">plot</span><span class="p">();</span>
+
+<span class="c">% Plot atom-projected fat bands</span>
+<span class="n">matdyn</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">qe</span><span class="p">.</span><span class="n">atnum</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;B xy B z Mg x&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="wan">
+<h2>WAN<a class="headerlink" href="#wan" title="Link to this heading"></a></h2>
+<p>Post-processing tools for Wannier90 with interfaces to WannierTools and FermiSurfer.</p>
+<p><strong>Methods:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">WAN(seedname_hrdat,</span> <span class="pre">seednamewout)</span></code> - Constructor with Wannier90 files</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exportfermisurfer()</span></code> - Export to FermiSurfer format</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plotband()</span></code> - Plot Wannier-interpolated bands</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exportwtin()</span></code>, <code class="docutils literal notranslate"><span class="pre">exportPOSCAR()</span></code> - Export to various formats</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">readhrdat()</span></code>, <code class="docutils literal notranslate"><span class="pre">readwout()</span></code> - Read Wannier90 output files</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ham_r2k()</span></code>, <code class="docutils literal notranslate"><span class="pre">get_band_energy()</span></code> - Hamiltonian transformations</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tofermisurfer()</span></code>, <code class="docutils literal notranslate"><span class="pre">tofatfermisurfer()</span></code> - Fermi surface generation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plotbulkband()</span></code>, <code class="docutils literal notranslate"><span class="pre">plotbulkfatband()</span></code> - Bulk band structure plotting</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fermi_velocity()</span></code> - Calculate Fermi velocities</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Documentation.html" class="btn btn-neutral float-left" title="Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tutorials.html" class="btn btn-neutral float-right" title="Tutorials" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Lizhou Yang.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

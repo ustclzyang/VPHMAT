@@ -1,0 +1,16 @@
+Download and Install
+####################
+
+
+System Requirements
+====================
+
+- **MATLAB**: Version R2023b or later
+- **Operating System**: Windows 10/11, Linux, or macOS
+
+.. - **Additional Toolboxes**: Statistics and Machine Learning Toolbox (recommended)
+
+VPHMAT is installation-free, follow these steps:
+
+1. Download :download:`VPHMAT <https://github.com/ustclzyang/VPHMAT/archive/refs/heads/main.zip>`.
+2. Unpack and configure VPHMAT.

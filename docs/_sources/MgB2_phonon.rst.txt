@@ -1,0 +1,100 @@
+MgB₂
+===========================================
+
+This tutorial demonstrates how to plot phonon dispersion and visualize phonon modes from Quantum ESPRESSO output files using MgB₂ as an example.
+
+Prerequisites
+-------------
+
+Required Quantum ESPRESSO output files:
+
+* `prefix.xml` - XML output file containing crystal structure (``pw.x`` output)
+* `matdyn.modes` - Phonon mode data file (``matdyn.x`` output)
+
+Phonon Dispersion Plot
+-------------------------
+
+Plot phonon dispersion of MgB₂:
+
+.. code-block:: matlab
+
+   matdyn=MATDYN('examples/MgB2/matdyn.modes');
+   matdyn.klabels={"\Gamma","M","K","\Gamma","A","L","H","A","L","M","H","K"};
+   matdyn.unit='thz'; % can also be 'ry', 'cmm1'
+   matdyn.plot
+   for i=1:size(matdyn.hLines,1)
+       matdyn.hLines(i).LineWidth=1.5;
+   end
+   set(gca,'FontSize',12);
+
+.. figure:: /_static/images/MgB2_phonon.png
+   :alt: Phonon dispersion for MgB2
+   :width: 500px
+   :align: center
+
+
+   Phonon dispersion
+
+Projected phonon dispersion
+---------------------------
+.. code-block:: matlab
+
+   matdyn=MATDYN('examples/MgB2/matdyn.modes');
+   % set k-point labels
+   matdyn.klabels={"\Gamma","M","K","\Gamma","A","L","H","A","L","M","H","K"};
+   matdyn.unit='thz'; % can also be 'ry', 'cmm1'
+   qe=QE.fromXML('examples/MgB2/MgB2.xml');
+   figure
+   matdyn.plot(qe.atnum,'B xy B z Mg xy Mg z')
+   for i=1:size(matdyn.hLines,1)
+       matdyn.hLines(i).LineWidth=1;
+   end
+   set(gca,'FontSize',12);
+
+.. figure:: /_static/images/MgB2_phonon_projected.png
+   :alt: Projected phonon dispersion for MgB2
+   :width: 500px
+   :align: center
+
+
+   Projected phonon dispersion
+
+
+Interactive phonon visualizer
+-------------------------
+
+.. code-block:: matlab
+
+   matdyn=MATDYN('examples/MgB2/matdyn.modes');
+   matdyn.klabels={"\Gamma","M","K","\Gamma","A","L","H","A","L","M","H","K"};
+   matdyn.unit='thz'; % can also be 'ry', 'cmm1'
+   
+   % load crystal structure from XML file
+   qe=QE.fromXML('examples/MgB2/MgB2.xml');
+   v=VPHMAT(qe);
+   v.matdyn=matdyn;
+   v.supercell=[3 3 1];
+   % set vibration amplitude
+   v.phonon.amplitude=0.3;
+   % set vibration speed
+   v.phonon.speed=1;
+   % same as gif
+   % v.phonon.save='gif'; % or 'mp4', you will get 'prefix-*-*.gif'
+   % if you set phonon.save='gif', animation will stop after one peroid
+   figure
+   v.animate
+   material([0.6 0.4 0.8 60])
+
+Click on the phonon dispersion plot to see the vibration mode animation for that specific phonon.
+
+.. figure:: /_static/images/MgB2_animate.gif
+   :alt: Phonon animation for MgB2
+   :width: 500px
+   :align: center
+
+
+   Phonon animation
+
+
+
+

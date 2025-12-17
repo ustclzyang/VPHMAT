@@ -1,0 +1,10 @@
+Contact
+=======
+
+.. For general enquiries about the use of VPHMAT please do refer to the `GitHub issues page <https://github.com/ustclzyang/VPHMAT/issues>`_.
+
+Enquiries about contributing to the development of VPHMAT can be addressed to:
+
+| **Lizhou Yang**
+| The University of Science and Technology of China
+| E-mail: yanglizhou (at) mail.ustc.edu.cn

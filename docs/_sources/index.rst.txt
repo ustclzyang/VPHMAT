@@ -1,0 +1,30 @@
+.. VPHMAT documentation master file, created by
+   sphinx-quickstart on Mon Dec 16 2024.
+
+Intro
+=====
+
+VPHMAT is an open-source MATLAB package for phonon visualization and post-processing toolkit for `QE <https://www.quantum-espresso.org/>`_, `VASP <https://www.vasp.at/>`_, and `Wannier90 <https://www.wannier.org/>`_. The name 'VPHMAT' stands for Visualization of PHonon properties within the MATrix framework, targeting computational studies in condensed matter physics.
+
+.. The most recent reference technical manuscript is:
+
+.. `[Author Names], "VPHMAT: A Comprehensive MATLAB Toolkit for Crystal Structure Visualization and Analysis", [Journal Name] [Volume], [Page] ([Year]) <[DOI Link]>`_.
+
+
+.. toctree::
+   :maxdepth: 1
+   :caption: PROJECT
+   :hidden:
+
+   About
+   Documentation
+   Acknowledgements
+   Contact
+
+.. toctree::
+   :maxdepth: 1
+   :caption: SOURCE CODE
+   :hidden:
+
+   DownloadAndInstall
+   GitHub <https://github.com/ustclzyang/VPHMAT>

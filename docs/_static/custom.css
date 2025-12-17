@@ -1,0 +1,36 @@
+.sidebar-block {
+    margin-bottom: 20px;
+    border: 1px solid #e1e4e5;
+    border-radius: 4px;
+    background-color: #f8f9fa;
+}
+
+.sidebar-title {
+    background-color: #2980B9;
+    color: white;
+    padding: 8px 12px;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 4px 4px 0 0;
+}
+
+.sidebar-block ul {
+    margin: 0;
+    padding: 8px 0;
+    list-style: none;
+}
+
+.sidebar-block li {
+    padding: 4px 12px;
+}
+
+.sidebar-block a {
+    color: #2980B9;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.sidebar-block a:hover {
+    color: #1a5276;
+    text-decoration: underline;
+}

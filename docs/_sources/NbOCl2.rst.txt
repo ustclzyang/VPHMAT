@@ -1,0 +1,168 @@
+NbOCl₂: Modifying Plot Style
+=============================
+
+This tutorial demonstrates how to modify plot styles and customize the appearance of crystal structure visualizations using NbOCl₂ as an example.
+
+Basic Structure Visualization
+-----------------------------
+
+Start with the basic NbOCl₂ structure visualization:
+
+.. code-block:: matlab
+
+   % set bond length
+   % only need to set it once on your computer
+   % Here determine bond connection between Nb and O atoms
+   VPHMAT.setBondLength('Nb','O',2.2)
+   % Load NbOCl₂ structure
+   qe=QE.fromPOSCAR('examples/NbOCl2/POSCAR');
+   v=VPHMAT(qe);
+   figure
+   v.plot
+   % adjust view angle
+   v.view=[50 20];
+   % adjust material properties, for better looking
+   material([0.5 0.7 0.8 60])
+
+.. figure:: /_static/images/NbOCl2.png
+   :alt: NbOCl₂ Crystal Structure
+   :width: 400px
+   :align: center
+
+   Basic visualization of NbOCl₂
+
+Customize Plot Style
+-----------------------------
+Wireframe
+
+.. code-block:: matlab
+
+   % continue from previous code
+   figure
+   v.style='Wireframe';
+   v.plot
+   v.view=[50 20];
+.. figure:: /_static/images/NbOCl2_wireframe.png
+   :alt: NbOCl₂ wireframe plot style
+   :width: 400px
+   :align: center
+
+   Wireframe style
+
+Space filling
+
+.. code-block:: matlab
+
+   % continue from previous code
+   figure
+   v.style='Space-filling';
+   v.plot
+   v.view=[50 20];
+   material([0.6 0.4 0.8 60])
+.. figure:: /_static/images/NbOCl2_space_filling.png
+   :alt: NbOCl₂ space filling plot style
+   :width: 400px
+   :align: center
+
+   Space-filling style
+
+Stick
+
+.. code-block:: matlab
+
+   % continue from previous code
+   figure
+   v.style='Stick';
+   v.plot
+   v.view=[50 20];
+   material([0.6 0.4 0.8 60])
+.. figure:: /_static/images/NbOCl2_stick.png
+   :alt: NbOCl₂ stick plot style
+   :width: 400px
+   :align: center
+
+   Stick style
+
+Modify atom radius, color and bond width
+--------------------------------------------
+.. code-block:: matlab
+
+   % continue from previous code
+   % get all Nb atom indices
+   Nb_idx=v.atoms.atnum==QE.get_atomic_number('Nb');
+   % change Nb atom radius to 1.6
+   v.atoms.radii(Nb_idx)=1.6;
+   % change Nb atom color to grey
+   v.atoms.colors(Nb_idx,:)=repmat([0.8 0.8 0.8],sum(Nb_idx),1);
+   % change bond width to 0.15
+   v.bonds.radius=0.15;
+
+   figure
+   v.style='Ball-and-stick';
+   v.plot
+   v.view=[50 20];
+   material([0.6 0.4 0.8 60])
+.. figure:: /_static/images/NbOCl2_modify.png
+   :alt: NbOCl₂ modified plot style
+   :width: 400px
+   :align: center
+
+   Modify atom radius, color and bond width
+
+Plot supercell
+-----------------------------
+.. code-block:: matlab
+
+   % continue from previous code
+   figure
+   v.style='Ball-and-stick';
+   v.supercell=[2 2 2];
+   v.plot
+   v.view=[50 20];
+   material([0.6 0.4 0.8 60])
+.. figure:: /_static/images/NbOCl2_supercell.png
+   :alt: NbOCl₂ supercell
+   :width: 400px
+   :align: center
+
+   Plot supercell
+
+Customize lattice style
+-----------------------------
+.. code-block:: matlab
+
+   % continue from previous code
+   figure
+   v.style='Ball-and-stick';
+   v.supercell=[1 1 1];
+   v.general.unitCell.lineStyle='--';
+   v.general.axes.showCompass=false;
+   v.general.axes.showAxisLabels=false;
+   v.plot
+   v.view=[50 20];
+   material([0.6 0.4 0.8 60])
+.. figure:: /_static/images/NbOCl2_lattice.png
+   :alt: NbOCl₂ lattice style
+   :width: 400px
+   :align: center
+
+   Customize lattice style
+
+Whether to show atoms outside the unit cell
+---------------------------------------------
+.. code-block:: matlab
+
+   % continue from previous code
+   figure
+   % only show atoms within the unit cell margin 0.1
+   v.general.celloutermargin=0.1;
+   v.boundary='A1';
+   v.plot
+   v.view=[50 20];
+   material([0.6 0.4 0.8 60])
+.. figure:: /_static/images/NbOCl2_margin.png
+   :alt: NbOCl₂ lattice style
+   :width: 400px
+   :align: center
+
+   Customize lattice style

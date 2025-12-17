@@ -1,0 +1,250 @@
+Classdef
+=========
+
+VPHMAT is an object-oriented MATLAB package where all functionality is implemented through classes.
+
+VPHMAT
+^^^^^^
+
+Main class for visualizing crystal structures and phonon modes.
+
+**Methods:**
+
+**Instance Methods:**
+
+- ``VPHMAT(qe)`` - Constructor for visualizing QE crystal structures
+- ``plot()`` - Display atomic structure with atoms, bonds, and unit cell
+- ``animate()`` - Interactive phonon mode visualization and animation
+- ``plotBonds()``, ``plotAtoms()``, ``plotCell()`` - Individual component plotting
+- ``initBonds()``, ``initAtoms()`` - Initialize bond and atom data
+- ``onStyleChanged()``, ``onViewChanged()`` - Event handlers for UI changes
+- ``tAtomsTau()`` - Transform atomic positions for phonon animation
+
+QE
+^^^^^^
+
+Parse and store Quantum ESPRESSO structure data.
+
+**Properties:**
+
+- ``prefix`` - System prefix or comment (from POSCAR line 1 or QE input)
+- ``alat`` - Lattice constant in Bohr
+- ``at`` - 3×3 lattice vectors (columns: a1, a2, a3, unit: alat)
+- ``tpiba`` - 2π/alat
+- ``bg`` - 3×3 reciprocal lattice vectors (columns: b1, b2, b3, unit: tpiba)
+- ``atm`` - Names of atomic species (cell array)
+- ``amass`` - Mass of atomic species
+- ``atnum`` - Atomic number of each atom
+- ``na`` - Number of atoms of each species
+- ``nat`` - Total number of atoms
+- ``ityp`` - Species index for each atom (1...nsp)
+- ``tau`` - 3×nat atomic positions (Bohr)
+- ``if_pos`` - 3×nat logical array indicating fixed atomic coordinates
+- ``fileType`` - File type: 'qe' (default) or 'vasp' (if from POSCAR)
+- ``poscarData`` - Original POSCAR data as unpacked struct (if from POSCAR)
+
+**Methods:**
+
+**Static Methods:**
+
+- ``fromPOSCAR(filePath)`` - Read VASP POSCAR file and construct QE object
+- ``fromXML(filePath)`` - Read Quantum ESPRESSO XML output file
+- ``fromCIF(filePath)`` - Read CIF file format
+- ``get_atomic_number(symbols)`` - Convert element symbols to atomic numbers
+- ``get_atomic_sym(atnum)`` - Convert atomic numbers to element symbols
+
+**Instance Methods:**
+
+- ``exportPOSCAR(filePath)``, ``exportCIF(filePath)`` - Export to file formats
+- ``pwinput(kpr)``, ``cp2kinput()`` - Generate input files for other codes
+
+
+NIST
+^^^^^^
+
+Fundamental physical constants downloaded from `NIST <https://physics.nist.gov/cuu/Constants/>`_.
+
+**Methods:**
+
+**Static Methods:**
+
+- ``convertunit(dataunit, unit)`` - Convert between energy units (meV, eV, Ry, THz, cm⁻¹)
+- ``initconvmat()`` - Initialize unit conversion matrix
+
+**Properties (Constants):**
+
+- ``elementary_charge``, ``electron_mass``, ``Planck_constant`` - Fundamental constants
+- ``Bohr_radius``, ``Hartree_energy``, ``Rydberg_constant`` - Atomic units
+- ``speed_of_light``, ``Boltzmann_constant`` - Physical constants
+
+BANDS
+^^^^^^
+
+Plot band structure from Quantum ESPRESSO bands.x and projwfc.x outputs.
+
+**Methods:**
+
+**Instance Methods:**
+
+- ``BANDS(filband, filproj)`` - Constructor with band and projection files
+- ``plot(orbname)`` - Plot band structure with orbital projections
+- ``plot_tiledlayout(orbname, mylim)`` - Tiled layout band plotting
+- ``wan(bandidx)`` - Wannier and EPW projections
+- ``readfilband(filePath)`` - Read band structure data
+- ``readfilproj(filePath)`` - Read projection data
+- ``plotband()``, ``plotfatband()`` - Band structure plotting functions
+- ``orbname2ind()`` - Convert orbital names to indices
+
+
+DOS
+^^^^^^
+
+Parse and plot density of states (DOS) from Quantum ESPRESSO projwfc.x outputs.
+
+**Properties:**
+
+- ``qe`` - QE object containing crystal structure information
+- ``fermi_energy`` - Fermi energy in Hartree
+- ``nlmchi`` - Atomic wavefunction information (n, l, m, chi)
+- ``pdos`` - ne×natomwfc projected density of states
+- ``dostot`` - ne×1 total density of states
+- ``pdostot`` - ne×1 total projected density of states
+- ``et`` - Energy values in eV
+- ``ax`` - Plot axes handle
+- ``hLines`` - Plot line handles
+
+**Methods:**
+
+**Instance Methods:**
+
+- ``DOS(filproj, filpdos)`` - Constructor reading projwfc.x output files
+- ``plot(orbname)`` - Plot DOS with optional orbital projections
+
+**Static Methods:**
+
+- ``readfildos(filePath)`` - Read total DOS from prefix.dos file
+- ``plotfildos(filePath, plotintdos)`` - Plot total DOS from file
+- ``readfilpdos(filePath)`` - Read projected DOS from pdos_atm files
+- ``plotdostot(et, pdostot, fermi_energy)`` - Plot total DOS
+- ``plotpdos(et, pdos, fermi_energy, nlmchi_ind, nlmchi_label)`` - Plot projected DOS
+
+**Usage Example:**
+
+.. code-block:: matlab
+
+   % Read DOS data from projwfc.x outputs
+   dos = DOS('prefix.projwfc_up', 'prefix');
+   
+   % Plot total DOS
+   dos.plot();
+   
+   % Plot projected DOS for specific orbitals
+   dos.plot('Si s Si px Si py Si pz Si dx2-y2');
+   
+   % Plot using atom and orbital notation
+   dos.plot('Si 3 s Si 3 px Si 3 py Si 3 pz Si 3 dx2-y2');
+   
+   % Plot using n+capital notation for orbital types
+   dos.plot('Si 3S Si 3P Si 3D');
+
+
+VASP
+^^^^^^
+
+Parse and store VASP data from various output files.
+
+**Methods:**
+
+**Static Methods:**
+
+- ``banddir(folderPath)``, ``scfdir(folderPath)`` - Read VASP calculation directories
+- ``dosdir(folderPath)``, ``dos_socdir(folderPath)`` - Read DOS data
+- ``readBANDdat()``, ``readKLABELS()``, ``readKPATHin()`` - Parse band structure files
+- ``readDOSCAR()``, ``readPROCAR()``, ``readCHGCAR()`` - Parse various VASP outputs
+
+**Instance Methods:**
+
+- ``plot()`` - Main plotting function for bands and DOS
+- ``plotband()``, ``plotfatband()``, ``plotTDOS()`` - Specific plotting functions
+- ``plotCHGCAR()``, ``plotELFCAR()`` - Charge density visualization
+- ``sliceCHGCAR()``, ``sliceELFCAR()`` - 2D slice visualization
+
+FermiSurfer
+^^^^^^
+
+A MATLAB adaptation of the open-source `FermiSurfer package <https://github.com/mitsuaki1987/fermisurfer>`_.
+
+**Methods:**
+
+**Instance Methods:**
+
+- ``FermiSurfer(filePath)`` - Constructor reading FermiSurfer data file
+- ``plot()`` - Visualize Fermi surfaces
+- ``readfermisurfer(filePath)`` - Read Fermi surface data
+- ``plotfermisurfer()``, ``plotfermisurferfbz()`` - Fermi surface plotting
+- ``plotfermisurfer2d()``, ``plotfermisurferfbz2d()`` - 2D Fermi surface plotting
+- ``bragg_vector()``, ``bragg_vert()`` - Brillouin zone boundary calculations
+- ``interpol_energy()`` - Energy interpolation for smooth surfaces
+- ``onInterpolChanged()`` - Interpolation parameter change handler
+
+
+MATDYN
+^^^^^^
+
+Parse and store Quantum ESPRESSO matdyn.f90 phonon dispersion data.
+
+**Properties:**
+
+- ``nat`` - Number of atoms
+- ``nq`` - Number of q-points
+- ``q`` - 3×nq q-point coordinates in tpiba units
+- ``freq`` - nat3×nq phonon frequencies in Ry
+- ``freq_thz`` - nat3×nq phonon frequencies in THz
+- ``freq_cmm1`` - nat3×nq phonon frequencies in cm⁻¹
+- ``unit`` - Frequency unit ('ry', 'thz', 'cmm1')
+- ``klabels`` - High symmetry point labels
+- ``eigvec`` - Phonon eigenvectors
+- ``z`` - Normalized phonon displacement vectors
+- ``ax`` - Phonon dispersion plot axes handle
+
+**Methods:**
+
+**Instance Methods:**
+
+- ``MATDYN(flvec)`` - Constructor reading matdyn.modes file
+- ``plot(atnum, atom_direc)`` - Plot phonon dispersion with optional atom-projected fat bands
+
+**Static Methods:**
+
+- ``plotband(q, freq, klabels)`` - Plot phonon dispersion bands
+- ``plotfatband(q, freq, klabels, z, ind, ind_label)`` - Plot atom-projected phonon fat bands
+
+**Usage Example:**
+
+.. code-block:: matlab
+
+   % Read phonon dispersion data
+   matdyn = MATDYN('matdyn.modes');
+   
+   % Plot basic phonon dispersion
+   matdyn.plot();
+   
+   % Plot atom-projected fat bands
+   matdyn.plot(qe.atnum, 'B xy B z Mg x');
+
+WAN
+^^^^^^
+
+Post-processing tools for Wannier90 with interfaces to WannierTools and FermiSurfer.
+
+**Methods:**
+
+- ``WAN(seedname_hrdat, seednamewout)`` - Constructor with Wannier90 files
+- ``exportfermisurfer()`` - Export to FermiSurfer format
+- ``plotband()`` - Plot Wannier-interpolated bands
+- ``exportwtin()``, ``exportPOSCAR()`` - Export to various formats
+- ``readhrdat()``, ``readwout()`` - Read Wannier90 output files
+- ``ham_r2k()``, ``get_band_energy()`` - Hamiltonian transformations
+- ``tofermisurfer()``, ``tofatfermisurfer()`` - Fermi surface generation
+- ``plotbulkband()``, ``plotbulkfatband()`` - Bulk band structure plotting
+- ``fermi_velocity()`` - Calculate Fermi velocities

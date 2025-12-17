@@ -1,0 +1,89 @@
+Tiledlayout
+===========
+
+This tutorial demonstrates how to display multiple crystal structures in a single figure using MATLAB's tiledlayout functionality.
+
+Especially useful for high-throughput calculations, where multiple crystal structures require simultaneous visualization and comparison.
+
+Basic Usage
+-----------
+
+Create a 2×2 grid layout for displaying crystal structures:
+
+.. code-block:: matlab
+
+   % Set bond lengths for different atom pairs
+   VPHMAT.setBondLength('Ga','O',2.2);
+   VPHMAT.setBondLength('Ni','O',2.1);
+   VPHMAT.setBondLength('N','Th',2.6); % set once and for all
+
+   % Create figure with tiledlayout
+   figure;
+   t = tiledlayout(2,2);
+   t.TileSpacing = 'none';
+   t.Padding = 'compact';
+
+   % Load POSCAR files from examples directory
+   folder = 'examples/tiledlayout';
+   files = dir(fullfile(folder, '*.poscar'));
+   
+   % Process each file and create subplot
+   for k = 1:length(files)
+       filename = fullfile(folder, files(k).name);
+       disp(['Processing file: ', filename]);
+       
+       % Load crystal structure
+       qe = QE.fromPOSCAR(filename);
+       v = VPHMAT(qe);
+       
+       % Move to next tile
+       nexttile;
+       
+       % Configure different visualization styles for each tile
+       switch k
+           case 1
+               v.style = 'Ball-and-stick';
+               v.view = 'a';
+               v.general.unitCell.lineStyle = ':';
+               v.general.axes.showCompass = false;
+               v.general.axes.showAxisLabels = false;
+               v.boundary = 'none';
+               title('Ball-and-stick')
+           case 2
+               v.style = 'Space-filling';
+               v.general.unitCell.lineStyle = '--';
+               title('Space-filling')
+           case 3
+               v.style = 'Wireframe';
+               title('Wireframe')
+           case 4
+               v.style = 'Stick';
+               v.boundary = 'A1';
+               title('Stick')
+       end
+       
+       % Plot the crystal structure
+       v.plot();
+       material([0.6 0.5 0.8 60])
+       
+       % Additional view configuration for first tile
+       switch k
+           case 1
+               v.view = 'a';
+       end
+   end
+
+.. figure:: /_static/images/tiledlayout.png
+   :alt: Tiledlayout for Multiple Crystal Structures
+   :width: 500px
+   :align: center
+
+   tiledlayout for multiple crystal structures
+
+
+The example demonstrates four different visualization styles:
+
+1. **Ball-and-stick**: Shows atoms as spheres and bonds as sticks
+2. **Space-filling**: Displays atoms as overlapping spheres
+3. **Wireframe**: Shows the crystal structure as a wireframe model
+4. **Stick**: Represents bonds as sticks with smaller atoms

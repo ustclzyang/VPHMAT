@@ -1,0 +1,208 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MgB₂ &mdash; VPHMAT 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=9acbadd1"></script>
+      <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            VPHMAT
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">PROJECT</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="About.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Documentation.html">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Acknowledgements.html">Acknowledgements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Contact.html">Contact</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">SOURCE CODE</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="DownloadAndInstall.html">Download and Install</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/ustclzyang/VPHMAT">GitHub</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">VPHMAT</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">MgB₂</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/MgB2.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="mgb2">
+<h1>MgB₂<a class="headerlink" href="#mgb2" title="Link to this heading"></a></h1>
+<p>This tutorial demonstrates how to plot band structure and density of states (DOS) from Quantum ESPRESSO output files using MgB₂ as an example.</p>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h2>
+<p>Required Quantum ESPRESSO output files:</p>
+<ul class="simple">
+<li><p><cite>prefix.xml</cite> - XML output file containing Fermi energy (<code class="docutils literal notranslate"><span class="pre">pw.x</span></code> output)</p></li>
+<li><p><cite>bands.dat</cite> - Band structure data file (<code class="docutils literal notranslate"><span class="pre">bands.x</span></code> output)</p></li>
+<li><p><cite>proj.dat.projwfc_up</cite> - Projection data file for spin up (<code class="docutils literal notranslate"><span class="pre">projwfc.x</span></code> output)</p></li>
+<li><p><cite>prefix.dos</cite> - Density of states data file (<code class="docutils literal notranslate"><span class="pre">dos.x</span></code> output)</p></li>
+<li><p><cite>prefix.pdos_tot</cite> - Density of states data file (<code class="docutils literal notranslate"><span class="pre">projwfc.x</span></code> output)</p></li>
+<li><p><cite>prefix.pdos_atm#*(*)_wfc#*(*)</cite> - Density of states data file (<code class="docutils literal notranslate"><span class="pre">projwfc.x</span></code> output)</p></li>
+</ul>
+</section>
+<section id="band-structure-plot">
+<h2>Band Structure Plot<a class="headerlink" href="#band-structure-plot" title="Link to this heading"></a></h2>
+<p>Plot the basic band structure of MgB₂:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">bands</span><span class="p">=</span><span class="n">BANDS</span><span class="p">(</span><span class="s">&#39;examples/MgB2/bands.dat&#39;</span><span class="p">);</span>
+<span class="n">bands</span><span class="p">.</span><span class="n">fermi_energy</span><span class="p">=</span><span class="n">BANDS</span><span class="p">.</span><span class="n">readfermienergy</span><span class="p">(</span><span class="s">&#39;examples/MgB2/MgB2.xml&#39;</span><span class="p">);</span>
+<span class="n">bands</span><span class="p">.</span><span class="n">klabels</span><span class="p">={</span><span class="s">&quot;\Gamma&quot;</span><span class="p">,</span><span class="s">&quot;M&quot;</span><span class="p">,</span><span class="s">&quot;K&quot;</span><span class="p">,</span><span class="s">&quot;\Gamma&quot;</span><span class="p">,</span><span class="s">&quot;A&quot;</span><span class="p">,</span><span class="s">&quot;L&quot;</span><span class="p">,</span><span class="s">&quot;H&quot;</span><span class="p">,</span><span class="s">&quot;A&quot;</span><span class="p">,</span><span class="s">&quot;L&quot;</span><span class="p">,</span><span class="s">&quot;M&quot;</span><span class="p">,</span><span class="s">&quot;H&quot;</span><span class="p">,</span><span class="s">&quot;K&quot;</span><span class="p">};</span>
+<span class="n">figure</span>
+<span class="s">bands.plot</span>
+<span class="nb">ylim</span><span class="p">([</span><span class="o">-</span><span class="mi">15</span><span class="w"> </span><span class="mi">15</span><span class="p">])</span>
+<span class="nb">yline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="s">&#39;--&#39;</span><span class="p">)</span>
+<span class="k">for</span><span class="w"> </span><span class="nb">i</span><span class="p">=</span><span class="mi">1</span><span class="p">:</span><span class="nb">size</span><span class="p">(</span><span class="n">bands</span><span class="p">.</span><span class="n">hLines</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">    </span><span class="n">bands</span><span class="p">.</span><span class="n">hLines</span><span class="p">(</span><span class="nb">i</span><span class="p">).</span><span class="n">LineWidth</span><span class="p">=</span><span class="mf">1.5</span><span class="p">;</span>
+<span class="k">end</span>
+<span class="nb">set</span><span class="p">(</span><span class="nb">gca</span><span class="p">,</span><span class="s">&#39;FontSize&#39;</span><span class="p">,</span><span class="mi">12</span><span class="p">);</span>
+</pre></div>
+</div>
+<figure class="align-center" id="id1">
+<a class="reference internal image-reference" href="_images/MgB2_band.png"><img alt="Band structure for MgB2" src="_images/MgB2_band.png" style="width: 500px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Band structure</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="fat-band-plot">
+<h2>Fat Band Plot<a class="headerlink" href="#fat-band-plot" title="Link to this heading"></a></h2>
+<p>Plot the fat band structure of MgB₂:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">bands</span><span class="p">=</span><span class="n">BANDS</span><span class="p">(</span><span class="s">&#39;examples/MgB2/bands.dat&#39;</span><span class="p">,</span><span class="s">&#39;examples/MgB2/proj.dat.projwfc_up&#39;</span><span class="p">);</span>
+<span class="n">bands</span><span class="p">.</span><span class="n">fermi_energy</span><span class="p">=</span><span class="n">BANDS</span><span class="p">.</span><span class="n">readfermienergy</span><span class="p">(</span><span class="s">&#39;examples/MgB2/MgB2.xml&#39;</span><span class="p">);</span>
+<span class="n">bands</span><span class="p">.</span><span class="n">klabels</span><span class="p">={</span><span class="s">&quot;\Gamma&quot;</span><span class="p">,</span><span class="s">&quot;M&quot;</span><span class="p">,</span><span class="s">&quot;K&quot;</span><span class="p">,</span><span class="s">&quot;\Gamma&quot;</span><span class="p">,</span><span class="s">&quot;A&quot;</span><span class="p">,</span><span class="s">&quot;L&quot;</span><span class="p">,</span><span class="s">&quot;H&quot;</span><span class="p">,</span><span class="s">&quot;A&quot;</span><span class="p">,</span><span class="s">&quot;L&quot;</span><span class="p">,</span><span class="s">&quot;M&quot;</span><span class="p">,</span><span class="s">&quot;H&quot;</span><span class="p">,</span><span class="s">&quot;K&quot;</span><span class="p">};</span>
+<span class="n">figure</span>
+<span class="s">bands.plot(&#39;Mg s B py B pz&#39;)</span>
+<span class="nb">ylim</span><span class="p">([</span><span class="o">-</span><span class="mi">15</span><span class="w"> </span><span class="mi">15</span><span class="p">])</span>
+<span class="nb">yline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="s">&#39;--&#39;</span><span class="p">,</span><span class="s">&#39;DisplayName&#39;</span><span class="p">,</span><span class="s">&#39;Fermi&#39;</span><span class="p">)</span>
+<span class="nb">legend</span>
+<span class="nb">set</span><span class="p">(</span><span class="nb">gca</span><span class="p">,</span><span class="s">&#39;FontSize&#39;</span><span class="p">,</span><span class="mi">12</span><span class="p">);</span>
+</pre></div>
+</div>
+<figure class="align-center" id="id2">
+<a class="reference internal image-reference" href="_images/MgB2_fatband.png"><img alt="Fat band structure for MgB2" src="_images/MgB2_fatband.png" style="width: 500px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Fat band structure</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="fat-dos-plot">
+<h2>Fat DOS Plot<a class="headerlink" href="#fat-dos-plot" title="Link to this heading"></a></h2>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% &quot;filproj&quot;.projwfc_up is only used for generating nlmchi （this file can be the same with fat band plot)</span>
+<span class="c">% then we search &quot;filpdos&quot;.pdos_atm#N(X)_wfc#M(l) according to nlmchi</span>
+<span class="n">pdos</span><span class="p">=</span><span class="n">DOS</span><span class="p">(</span><span class="s">&#39;examples/MgB2/proj.dat.projwfc_up&#39;</span><span class="p">,</span><span class="s">&#39;MgB2&#39;</span><span class="p">);</span>
+<span class="n">pdos</span><span class="p">.</span><span class="n">fermi_energy</span><span class="p">=</span><span class="n">BANDS</span><span class="p">.</span><span class="n">readfermienergy</span><span class="p">(</span><span class="s">&#39;examples/MgB2/MgB2.xml&#39;</span><span class="p">);</span>
+<span class="c">% plot fat dos</span>
+<span class="n">pdos</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="s">&#39;Mg s B py B pz&#39;</span><span class="p">)</span>
+<span class="k">for</span><span class="w"> </span><span class="nb">i</span><span class="p">=</span><span class="mi">1</span><span class="p">:</span><span class="nb">size</span><span class="p">(</span><span class="n">pdos</span><span class="p">.</span><span class="n">hLines</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">    </span><span class="n">pdos</span><span class="p">.</span><span class="n">hLines</span><span class="p">(</span><span class="nb">i</span><span class="p">).</span><span class="n">LineWidth</span><span class="p">=</span><span class="mf">1.5</span><span class="p">;</span>
+<span class="k">end</span>
+<span class="c">% plot total dos</span>
+<span class="n">pdos</span><span class="p">.</span><span class="n">plot</span>
+<span class="k">for</span><span class="w"> </span><span class="nb">i</span><span class="p">=</span><span class="mi">1</span><span class="p">:</span><span class="nb">size</span><span class="p">(</span><span class="n">pdos</span><span class="p">.</span><span class="n">hLines</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">    </span><span class="n">pdos</span><span class="p">.</span><span class="n">hLines</span><span class="p">(</span><span class="nb">i</span><span class="p">).</span><span class="n">LineWidth</span><span class="p">=</span><span class="mf">1.5</span><span class="p">;</span>
+<span class="w">    </span><span class="n">pdos</span><span class="p">.</span><span class="n">hLines</span><span class="p">(</span><span class="nb">i</span><span class="p">).</span><span class="n">Color</span><span class="p">=</span><span class="s">&#39;k&#39;</span><span class="p">;</span>
+<span class="k">end</span>
+<span class="nb">xlim</span><span class="p">([</span><span class="mi">0</span><span class="w"> </span><span class="mi">2</span><span class="p">])</span>
+<span class="nb">ylim</span><span class="p">([</span><span class="o">-</span><span class="mi">15</span><span class="w"> </span><span class="mi">15</span><span class="p">])</span>
+<span class="nb">yline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="s">&#39;--&#39;</span><span class="p">,</span><span class="s">&#39;DisplayName&#39;</span><span class="p">,</span><span class="s">&#39;Fermi&#39;</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span><span class="nb">gca</span><span class="p">,</span><span class="s">&#39;FontSize&#39;</span><span class="p">,</span><span class="mi">12</span><span class="p">);</span>
+<span class="n">legend</span>
+</pre></div>
+</div>
+<figure class="align-center" id="id3">
+<a class="reference internal image-reference" href="_images/MgB2_fatdos.png"><img alt="Fat DOS for MgB2" src="_images/MgB2_fatdos.png" style="width: 500px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Fat DOS</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Lizhou Yang.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

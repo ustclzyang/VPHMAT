@@ -1,0 +1,11 @@
+Documentation
+=============
+
+VPHMAT is built on a class-based architecture. Create class instances to access all functionality.
+
+.. toctree::
+    :maxdepth: 1
+    :hidden:
+
+    classdef
+    tutorials

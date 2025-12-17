@@ -1,0 +1,30 @@
+Import and Export Crystal Structure
+=====================================
+
+This tutorial demonstrates how to import and export crystal structure data from various file formats including VASP, Quantum ESPRESSO (QE), and CIF files.
+
+Supported File Formats
+----------------------
+
+VPHMAT supports the following file formats:
+
+* **VASP**: POSCAR, CONTCAR
+* **Quantum ESPRESSO**: XML output files
+* **CIF**: Crystallographic Information Framework files
+
+.. code-block:: matlab
+
+   % Import from VASP file
+   qe = QE.fromPOSCAR('examples/MgB2/MgB2.vasp');
+
+   % Export to VASP file
+   qe.exportPOSCAR('examples/MgB2/MgB2.poscar');
+   
+   % Import from QE prefix.xml file
+   qe = QE.fromXML('examples/MgB2/MgB2.xml');
+
+   % Import from *.cif file, not fully tested
+   qe = QE.fromCIF('examples/MgB2/MgB2.cif');
+
+   % Export to *.cif file, not fully tested
+   qe.exportCIF('examples/MgB2/MgB2_.cif');
