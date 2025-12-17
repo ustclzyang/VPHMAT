@@ -340,7 +340,11 @@ classdef VPHMAT < handle
             iatmp=repmat(1:this.qe.nat,[1 27]);
             Rtmp=repelem([cx cy cz].',1,this.qe.nat);
             tautmp=tautmp+Rtmp;
-            d=1e-10/NIST.Bohr_radius; % Bohr
+            if isprop(this,'general') && isfield(this.general,'celloutermargin')
+                d=this.general.celloutermargin*1e-10/NIST.Bohr_radius; % Bohr
+            else
+                d=1e-10/NIST.Bohr_radius; % Bohr
+            end            
             originmovd=VPHMAT.expandat(this.qe.alat,this.qe.at,this.qe.bg,d); % direct
             ind=all(tautmp>=originmovd & tautmp<=(1-originmovd));  % ind(qe.nat*14-qe.nat+1:qe.nat*14) is true
             this.atoms.nat=sum(ind);
