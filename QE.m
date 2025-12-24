@@ -318,7 +318,7 @@ classdef QE < handle
                 '_atom_site_fract_y','_atom_site_fract_z',...
                 '_atom_site_occupancy','_atom_site_U_iso_or_equiv', ...
                 '_atom_site_adp_type'}, ...
-                {'%s','%s','%d','%f','%f','%f','%d','%f','%s'});
+                {'%s','%s','%d','%f','%f','%f','%f','%s','%s'});
             while ~feof(fid)
                 lines=strsplit(linet);
                 switch lines{1}
@@ -370,7 +370,7 @@ classdef QE < handle
                                     fract_y=atom_site{:,atom_site_idx('_atom_site_fract_y')};
                                     fract_z=atom_site{:,atom_site_idx('_atom_site_fract_z')};                                    
                                     tau_cryst_ori=[fract_x fract_y fract_z].';
-                                elseif startsWith(keys1,'_symmetry_equiv')
+                                elseif startsWith(keys1,'_symmetry_equiv') || startsWith(keys1,'_space_group')
                                     if strcmp(keys1,'_symmetry_equiv_pos_site_id') ...
                                             && strcmp(keys{2},'_symmetry_equiv_pos_as_xyz')
                                         pos_site=textscan(fid,'%d %s %s %s', ...
@@ -379,12 +379,12 @@ classdef QE < handle
                                         xop=pos_site{2};
                                         yop=pos_site{3};
                                         zop=pos_site{4};
-                                    elseif strcmp(keys1,'_symmetry_equiv_pos_as_xyz') ...
+                                    elseif (strcmp(keys1,'_symmetry_equiv_pos_as_xyz') || strcmp(keys1,'_space_group_symop_operation_xyz')) ...
                                             && isempty(keys{2})
                                         ftmp=ftell(fid);                                        
                                         for j=1:1e4
                                             tmp=fgetl(fid);
-                                            if feof(fid) || startsWith(strtrim(tmp),'_') || startsWith(strtrim(tmp),'loop_')
+                                            if feof(fid) || startsWith(strtrim(tmp),'_') || startsWith(strtrim(tmp),'loop_') || isempty(strtrim(tmp))
                                                 break
                                             end
                                         end
