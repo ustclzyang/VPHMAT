@@ -37,3 +37,10 @@ Wannier90 post-processing
 :doc:`FermiSurfer <FermiSurfer>`
 
 How to construct Hamiltonian matrix from Wannier90 output files and plot band structure.
+
+Structure Prediction Integration
+---------------------------------
+
+:doc:`Integrate with AISP <AISP>`
+
+How to utilize AISP to generate crystal structures and display their band structures and DOS.
