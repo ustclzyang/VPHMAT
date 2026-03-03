@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Import and Export Crystal Structure &mdash; VPHMAT 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
 
@@ -89,9 +89,10 @@
 <h2>Supported File Formats<a class="headerlink" href="#supported-file-formats" title="Link to this heading"></a></h2>
 <p>VPHMAT supports the following file formats:</p>
 <ul class="simple">
-<li><p><strong>VASP</strong>: POSCAR, CONTCAR</p></li>
-<li><p><strong>Quantum ESPRESSO</strong>: XML output files</p></li>
+<li><p><strong>VASP</strong>: <code class="docutils literal notranslate"><span class="pre">POSCAR,</span> <span class="pre">CONTCAR</span></code></p></li>
+<li><p><strong>Quantum ESPRESSO</strong>: output files <code class="docutils literal notranslate"><span class="pre">prefix.xml</span></code></p></li>
 <li><p><strong>CIF</strong>: Crystallographic Information Framework files</p></li>
+<li><p><strong>Wannier90</strong>: input files <code class="docutils literal notranslate"><span class="pre">seedname.win</span></code></p></li>
 </ul>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Import from VASP file</span>
 <span class="n">qe</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">QE</span><span class="p">.</span><span class="n">fromPOSCAR</span><span class="p">(</span><span class="s">&#39;examples/MgB2/MgB2.vasp&#39;</span><span class="p">);</span>
@@ -102,11 +103,23 @@
 <span class="c">% Import from QE prefix.xml file</span>
 <span class="n">qe</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">QE</span><span class="p">.</span><span class="n">fromXML</span><span class="p">(</span><span class="s">&#39;examples/MgB2/MgB2.xml&#39;</span><span class="p">);</span>
 
+<span class="c">% To QE pw.in template</span>
+<span class="n">qe</span><span class="p">.</span><span class="n">topwin</span><span class="p">(</span><span class="s">&#39;examples/MgB2/relax.in&#39;</span><span class="p">,</span><span class="s">&#39;vc-relax&#39;</span><span class="p">,</span><span class="mf">0.04</span><span class="p">);</span><span class="w"> </span><span class="c">% 0.04 is kpoint density</span>
+
 <span class="c">% Import from *.cif file, not fully tested</span>
 <span class="n">qe</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">QE</span><span class="p">.</span><span class="n">fromCIF</span><span class="p">(</span><span class="s">&#39;examples/MgB2/MgB2.cif&#39;</span><span class="p">);</span>
 
 <span class="c">% Export to *.cif file, not fully tested</span>
 <span class="n">qe</span><span class="p">.</span><span class="n">exportCIF</span><span class="p">(</span><span class="s">&#39;examples/MgB2/MgB2_.cif&#39;</span><span class="p">);</span>
+<span class="c">% Export to *.cif file containing symmetry information, not fully tested</span>
+<span class="n">qe</span><span class="p">.</span><span class="n">exportCIF</span><span class="p">(</span><span class="s">&#39;examples/MgB2/MgB2_.cif&#39;</span><span class="p">,</span><span class="n">SYMM</span><span class="p">.</span><span class="n">serial</span><span class="p">(</span><span class="n">qe</span><span class="p">));</span>
+
+<span class="c">% Import from Wannier90 seedname.win file</span>
+<span class="n">qe</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">QE</span><span class="p">.</span><span class="n">fromWIN</span><span class="p">(</span><span class="s">&#39;examples/MgB2/wannier90/MgB2.win&#39;</span><span class="p">);</span>
+
+<span class="c">% To WannierTools wt.in template</span>
+<span class="n">projections</span><span class="p">=</span><span class="n">WAN</span><span class="p">.</span><span class="n">get_projections</span><span class="p">(</span><span class="s">&#39;examples/MgB2/wannier90/MgB2.win&#39;</span><span class="p">,</span><span class="s">&#39;examples/MgB2/wannier90/MgB2.wout&#39;</span><span class="p">)</span>
+<span class="n">qe</span><span class="p">.</span><span class="n">towtin</span><span class="p">(</span><span class="s">&#39;examples/MgB2/wannier90/wt.in&#39;</span><span class="p">,</span><span class="n">projections</span><span class="p">);</span>
 </pre></div>
 </div>
 </section>

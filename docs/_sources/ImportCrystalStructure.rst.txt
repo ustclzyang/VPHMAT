@@ -8,9 +8,10 @@ Supported File Formats
 
 VPHMAT supports the following file formats:
 
-* **VASP**: POSCAR, CONTCAR
-* **Quantum ESPRESSO**: XML output files
+* **VASP**: ``POSCAR, CONTCAR``
+* **Quantum ESPRESSO**: output files ``prefix.xml``
 * **CIF**: Crystallographic Information Framework files
+* **Wannier90**: input files ``seedname.win``
 
 .. code-block:: matlab
 
@@ -22,9 +23,21 @@ VPHMAT supports the following file formats:
    
    % Import from QE prefix.xml file
    qe = QE.fromXML('examples/MgB2/MgB2.xml');
-
+   
+   % To QE pw.in template
+   qe.topwin('examples/MgB2/relax.in','vc-relax',0.04); % 0.04 is kpoint density
+   
    % Import from *.cif file, not fully tested
    qe = QE.fromCIF('examples/MgB2/MgB2.cif');
 
    % Export to *.cif file, not fully tested
    qe.exportCIF('examples/MgB2/MgB2_.cif');
+   % Export to *.cif file containing symmetry information, not fully tested
+   qe.exportCIF('examples/MgB2/MgB2_.cif',SYMM.serial(qe));
+
+   % Import from Wannier90 seedname.win file
+   qe = QE.fromWIN('examples/MgB2/wannier90/MgB2.win');
+
+   % To WannierTools wt.in template
+   projections=WAN.get_projections('examples/MgB2/wannier90/MgB2.win','examples/MgB2/wannier90/MgB2.wout')
+   qe.towtin('examples/MgB2/wannier90/wt.in',projections);

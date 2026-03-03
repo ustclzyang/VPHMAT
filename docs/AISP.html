@@ -197,7 +197,7 @@ mv<span class="w"> </span>*_POSCAR*<span class="w"> </span>structure
 <span class="nt">parallel_job</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6</span>
 </pre></div>
 </div>
-<p>Also prepare slurm script <cite>aisp.slurm</cite> to run VASP on HPC, using the template provided by the AISP package. Notice that <cite>-N</cite> should be the same as <cite>parallel_job</cite>, and <cite>–ntasks-per-node</cite> should be the same as <cite>np</cite>. You also need to modify the module loading part.</p>
+<p>Also prepare slurm script <cite>aisp.slurm</cite> to run VASP on HPC, using the template provided by the AISP package. Notice that <code class="docutils literal notranslate"><span class="pre">-N</span></code> should be the same as <cite>parallel_job</cite>, and <code class="docutils literal notranslate"><span class="pre">--ntasks-per-node</span></code> should be the same as <cite>np</cite>. You also need to modify the module loading part.</p>
 <p>Prepare INCAR (for lattice relaxation, suggest setting ISIF=3, ISYM=0, EDIFF = 1E-5, EDIFFG = -0.02, NSW = 50) and POTCAR files in the <cite>user/TiO2/structure</cite> directory.</p>
 <p>Submit the job to HPC:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sbatch<span class="w"> </span>aisp.slurm
@@ -206,20 +206,25 @@ mv<span class="w"> </span>*_POSCAR*<span class="w"> </span>structure
 <p>The generated directory structure is as follows:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>.
 └── TiO2/                  # Material directory
+    ├── aisp.slurm          # Slurm script to run VASP on HPC
+    ├── input.yaml          # Input configuration file
     ├── best_pop.txt
     ├── delete.txt
     ├── fail_pop.txt
     ├── TiO2.m             # Matlab script to view structures
     ├── structure/         # Structure directory
+        ├── INCAR
+        ├── POTCAR
+        └── ...
     ├── GA1/                  # Generation 1 directory, structures are from structure/
         ├── relax_pop.txt     # all structures relaxed by VASP
         ├── good_pop.txt      # good structures (with lowest cohesive energy, they are parents of the next generation)
         ├── keep_pop.txt
-        ├── GA1-1
+        ├── GA1-1/
            ├── POSCAR
            ├── OUTCAR
            └── ...
-        ├── GA1-2
+        ├── GA1-2/
         └── ...
     ├── GA2/                  # Generation 2 directory
     └── GA3/                  # Generation 3 directory
@@ -256,6 +261,75 @@ mv<span class="w"> </span>*_POSCAR*<span class="w"> </span>structure
 <p><span class="caption-text">Cohesive energy of every generation</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
 </figcaption>
 </figure>
+</section>
+<section id="phonon-band-and-dos-calculation">
+<h2>Phonon, band and DOS calculation<a class="headerlink" href="#phonon-band-and-dos-calculation" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># copy good structures from GA3/good_pop.txt to `post` dir.</span>
+./good_pop.sh
+<span class="c1"># relax structures in higher precision and perform phonon calculation</span>
+./post_relax_dfpt.sh
+</pre></div>
+</div>
+<p>The generated directory structure is as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>.
+└── TiO2/                  # Material directory
+    ├── TiO2.m             # Matlab script to view structures
+    └── post/              # Post-processing directory
+        ├── GA1-5/         # vaspdir
+            ├── relax/
+                ├── POSCAR
+                ├── CONTCAR
+                ├── OUTCAR
+                └── ...
+            ├── DFPT/
+                ├── POSCAR
+                ├── POSCAR-unitcell
+                ├── OUTCAR
+                ├── DYNMAT
+                ├── FORCE_CONSTANTS
+                ├── phonopy.yaml
+                ├── band.conf
+                ├── band.yaml
+                ├── dos.conf
+                ├── mesh.yaml
+                ├── total_dos.dat
+                └── ...
+        ├── GA1-10/        # vaspdir
+        └── ...
+</pre></div>
+</div>
+<p>During the phonon calculation, we can check phonon dispersion and DOS by adding the following code to <cite>TiO2.m</cite>:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">%% check phonon dispersion</span>
+<span class="n">aisp</span><span class="p">=</span><span class="n">AISP</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">&#39;post&#39;</span><span class="p">);</span>
+<span class="n">aisp</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="s">&#39;style&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="s">&#39;rows&#39;</span><span class="p">,</span><span class="mi">5</span><span class="p">);</span><span class="w"> </span><span class="c">% style 1: plot crystal structure, reciprocal lattice, phonon dispersion and phdos</span>
+</pre></div>
+</div>
+<figure class="align-center" id="id4">
+<a class="reference internal image-reference" href="_static/images/TiO2_phonon.png"><img alt="TiO₂ phonon dispersion" src="_static/images/TiO2_phonon.png" style="width: 500px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">TiO₂ phonon dispersion</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Typically, structures with phonon frequency &gt; -0.2418 THz are considered dynamically stable, then we calculate other properties of these structures, such as band structure, DOS and elastic constants.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># calculate band structure (dynamically stable structures)</span>
+./post_band.sh
+</pre></div>
+</div>
+<p>The generated directory structure is as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>.
+└── TiO2/                  # Material directory
+    ├── TiO2.m             # Matlab script to view structures
+    └── post/              # Post-processing directory
+        ├── GA1-5/         # vaspdir
+            ├── relax/
+            ├── DFPT/
+            ├── scf/
+            ├── band/
+        ├── GA1-10/        # vaspdir
+        └── ...
+</pre></div>
+</div>
 </section>
 </section>
 

@@ -127,7 +127,7 @@ First, we need to prepare the input file `input.yaml`.
     np: 64
     parallel_job: 6
 
-Also prepare slurm script `aisp.slurm` to run VASP on HPC, using the template provided by the AISP package. Notice that `-N` should be the same as `parallel_job`, and `--ntasks-per-node` should be the same as `np`. You also need to modify the module loading part.
+Also prepare slurm script `aisp.slurm` to run VASP on HPC, using the template provided by the AISP package. Notice that ``-N`` should be the same as `parallel_job`, and ``--ntasks-per-node`` should be the same as `np`. You also need to modify the module loading part.
 
 Prepare INCAR (for lattice relaxation, suggest setting ISIF=3, ISYM=0, EDIFF = 1E-5, EDIFFG = -0.02, NSW = 50) and POTCAR files in the `user/TiO2/structure` directory.
 
@@ -143,20 +143,25 @@ The generated directory structure is as follows:
 
     .
     └── TiO2/                  # Material directory
+        ├── aisp.slurm          # Slurm script to run VASP on HPC
+        ├── input.yaml          # Input configuration file
         ├── best_pop.txt
         ├── delete.txt
         ├── fail_pop.txt
         ├── TiO2.m             # Matlab script to view structures
         ├── structure/         # Structure directory
+            ├── INCAR
+            ├── POTCAR
+            └── ...
         ├── GA1/                  # Generation 1 directory, structures are from structure/
             ├── relax_pop.txt     # all structures relaxed by VASP
             ├── good_pop.txt      # good structures (with lowest cohesive energy, they are parents of the next generation)
             ├── keep_pop.txt
-            ├── GA1-1
+            ├── GA1-1/
                ├── POSCAR
                ├── OUTCAR
                └── ...
-            ├── GA1-2
+            ├── GA1-2/
             └── ...
         ├── GA2/                  # Generation 2 directory
         └── GA3/                  # Generation 3 directory
@@ -195,3 +200,81 @@ Add the following code to TiO2.m to view good structures:
    :align: center
 
    Cohesive energy of every generation
+
+Phonon, band and DOS calculation
+------------------------
+
+.. code-block:: bash
+
+    # copy good structures from GA3/good_pop.txt to `post` dir.
+    ./good_pop.sh
+    # relax structures in higher precision and perform phonon calculation
+    ./post_relax_dfpt.sh
+
+The generated directory structure is as follows:
+
+.. code-block:: text
+
+    .
+    └── TiO2/                  # Material directory
+        ├── TiO2.m             # Matlab script to view structures
+        └── post/              # Post-processing directory
+            ├── GA1-5/         # vaspdir
+                ├── relax/
+                    ├── POSCAR
+                    ├── CONTCAR
+                    ├── OUTCAR
+                    └── ...
+                ├── DFPT/
+                    ├── POSCAR
+                    ├── POSCAR-unitcell
+                    ├── OUTCAR
+                    ├── DYNMAT
+                    ├── FORCE_CONSTANTS
+                    ├── phonopy.yaml
+                    ├── band.conf
+                    ├── band.yaml
+                    ├── dos.conf
+                    ├── mesh.yaml
+                    ├── total_dos.dat
+                    └── ...
+            ├── GA1-10/        # vaspdir
+            └── ...
+
+During the phonon calculation, we can check phonon dispersion and DOS by adding the following code to `TiO2.m`:
+
+.. code-block:: matlab
+
+    %% check phonon dispersion
+    aisp=AISP.post('post');
+    aisp.plot('style',1,'rows',5); % style 1: plot crystal structure, reciprocal lattice, phonon dispersion and phdos
+
+.. figure:: /_static/images/TiO2_phonon.png
+   :alt: TiO₂ phonon dispersion
+   :width: 500px
+   :align: center
+
+   TiO₂ phonon dispersion
+
+Typically, structures with phonon frequency > -0.2418 THz are considered dynamically stable, then we calculate other properties of these structures, such as band structure, DOS and elastic constants.
+
+.. code-block:: bash
+
+    # calculate band structure (dynamically stable structures)
+    ./post_band.sh
+
+The generated directory structure is as follows:
+
+.. code-block:: text
+
+    .
+    └── TiO2/                  # Material directory
+        ├── TiO2.m             # Matlab script to view structures
+        └── post/              # Post-processing directory
+            ├── GA1-5/         # vaspdir
+                ├── relax/
+                ├── DFPT/
+                ├── scf/
+                ├── band/
+            ├── GA1-10/        # vaspdir
+            └── ...
