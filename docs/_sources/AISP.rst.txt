@@ -32,7 +32,7 @@ A complete structure prediction and screening process typically involves two ste
 
 Generate initial structures
 ----------------------------
-First, we need to prepare the input file `aisp.in` in json format. Here is an example for TiO2, we specify chemical composition and space group:
+First, we need to prepare the input file `aisp.in` in json format. Here is an example for TiO₂, we specify chemical composition and space group:
 
 .. code-block:: json
 
@@ -255,6 +255,10 @@ During the phonon calculation, we can check phonon dispersion and DOS by adding 
    :align: center
 
    TiO₂ phonon dispersion
+
+.. note::
+
+    For virtual phonon modes appear in TiO₂, please refer to http://staff.ustc.edu.cn/~zqj/posts/Phonopy-Rutile-TiO2/  https://journals.aps.org/prb/abstract/10.1103/PhysRevB.81.134303
 
 Typically, structures with phonon frequency > -0.2418 THz are considered dynamically stable, then we calculate other properties of these structures, such as band structure, DOS and elastic constants.
 
