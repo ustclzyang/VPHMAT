@@ -3,7 +3,7 @@ Download and Install
 
 
 System Requirements
-====================
+===================
 
 - **MATLAB**: Version R2023b or later
 - **Operating System**: Windows 10/11, Linux, or macOS

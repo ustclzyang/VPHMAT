@@ -1,5 +1,5 @@
 Integrate with AISP
-===========================================
+===================
 
 This tutorial demonstrates how to utilize AISP to generate crystal structures and display their band structures and DOS.
 
@@ -202,7 +202,7 @@ Add the following code to TiO2.m to view good structures:
    Cohesive energy of every generation
 
 Phonon, band and DOS calculation
-------------------------
+--------------------------------
 
 .. code-block:: bash
 

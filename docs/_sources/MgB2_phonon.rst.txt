@@ -12,7 +12,7 @@ Required Quantum ESPRESSO output files:
 * `matdyn.modes` - Phonon mode data file (``matdyn.x`` output)
 
 Phonon Dispersion Plot
--------------------------
+----------------------
 
 Plot phonon dispersion of MgB₂:
 
@@ -61,7 +61,7 @@ Projected phonon dispersion
 
 
 Interactive phonon visualizer
--------------------------
+-----------------------------
 
 .. code-block:: matlab
 

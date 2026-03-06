@@ -1,5 +1,5 @@
 Import and Export Crystal Structure
-=====================================
+===================================
 
 This tutorial demonstrates how to import and export crystal structure data from various file formats including VASP, Quantum ESPRESSO (QE), and CIF files.
 
@@ -41,3 +41,6 @@ VPHMAT supports the following file formats:
    % To WannierTools wt.in template
    projections=WAN.get_projections('examples/MgB2/wannier90/MgB2.win','examples/MgB2/wannier90/MgB2.wout')
    qe.towtin('examples/MgB2/wannier90/wt.in',projections);
+
+   % To KSSOLV crystal structure
+   crystal=qe.toKSSOLV;

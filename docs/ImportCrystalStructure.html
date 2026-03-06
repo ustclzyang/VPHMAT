@@ -120,6 +120,9 @@
 <span class="c">% To WannierTools wt.in template</span>
 <span class="n">projections</span><span class="p">=</span><span class="n">WAN</span><span class="p">.</span><span class="n">get_projections</span><span class="p">(</span><span class="s">&#39;examples/MgB2/wannier90/MgB2.win&#39;</span><span class="p">,</span><span class="s">&#39;examples/MgB2/wannier90/MgB2.wout&#39;</span><span class="p">)</span>
 <span class="n">qe</span><span class="p">.</span><span class="n">towtin</span><span class="p">(</span><span class="s">&#39;examples/MgB2/wannier90/wt.in&#39;</span><span class="p">,</span><span class="n">projections</span><span class="p">);</span>
+
+<span class="c">% To KSSOLV crystal structure</span>
+<span class="n">crystal</span><span class="p">=</span><span class="n">qe</span><span class="p">.</span><span class="n">toKSSOLV</span><span class="p">;</span>
 </pre></div>
 </div>
 </section>

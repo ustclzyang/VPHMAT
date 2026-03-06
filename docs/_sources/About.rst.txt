@@ -1,10 +1,10 @@
 About
-=============
+=====
 
-VPHMAT is an open-source MATLAB package for phonon visualization and post-processing toolkit for `QE <https://www.quantum-espresso.org/>`_, `VASP <https://www.vasp.at/>`_, and `Wannier90 <https://www.wannier.org/>`_. The name 'VPHMAT' stands for Visualization of PHonon properties within the MATrix framework, targeting computational studies in condensed matter physics.
+VPHMAT is an open-source MATLAB package for phonon visualization and post-processing toolkit for `QE <https://www.quantum-espresso.org/>`_, `VASP <https://www.vasp.at/>`_, and `Wannier90 <https://www.wannier.org/>`_. The name 'VPHMAT' stands for Visualization of PHonon properties within MATLAB, targeting computational studies in condensed matter physics.
 
 Features
-----------------------
+--------
 
 - **User-friendly interface**: Intuitive MATLAB-based environment
 - **Computational efficiency**: Optimized matrix operations for fast calculations

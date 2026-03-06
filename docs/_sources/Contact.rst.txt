@@ -6,5 +6,5 @@ Contact
 Enquiries about contributing to the development of VPHMAT can be addressed to:
 
 | **Lizhou Yang**
-| The University of Science and Technology of China
+| University of Science and Technology of China
 | E-mail: yanglizhou (at) mail.ustc.edu.cn
