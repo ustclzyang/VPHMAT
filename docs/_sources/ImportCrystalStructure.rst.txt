@@ -33,7 +33,7 @@ VPHMAT supports the following file formats:
    % Export to *.cif file, not fully tested
    qe.exportCIF('examples/MgB2/MgB2_.cif');
    % Export to *.cif file containing symmetry information, not fully tested
-   qe.exportCIF('examples/MgB2/MgB2_.cif',SYMM.serial(qe));
+   qe.exportCIF('examples/MgB2/MgB2_.cif',SYMM.hall(qe));
 
    % Import from Wannier90 seedname.win file
    qe = QE.fromWIN('examples/MgB2/wannier90/MgB2.win');

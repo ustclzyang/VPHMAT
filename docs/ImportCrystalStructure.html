@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Import and Export Crystal Structure &mdash; VPHMAT 1.0.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
 
@@ -112,7 +112,7 @@
 <span class="c">% Export to *.cif file, not fully tested</span>
 <span class="n">qe</span><span class="p">.</span><span class="n">exportCIF</span><span class="p">(</span><span class="s">&#39;examples/MgB2/MgB2_.cif&#39;</span><span class="p">);</span>
 <span class="c">% Export to *.cif file containing symmetry information, not fully tested</span>
-<span class="n">qe</span><span class="p">.</span><span class="n">exportCIF</span><span class="p">(</span><span class="s">&#39;examples/MgB2/MgB2_.cif&#39;</span><span class="p">,</span><span class="n">SYMM</span><span class="p">.</span><span class="n">serial</span><span class="p">(</span><span class="n">qe</span><span class="p">));</span>
+<span class="n">qe</span><span class="p">.</span><span class="n">exportCIF</span><span class="p">(</span><span class="s">&#39;examples/MgB2/MgB2_.cif&#39;</span><span class="p">,</span><span class="n">SYMM</span><span class="p">.</span><span class="n">hall</span><span class="p">(</span><span class="n">qe</span><span class="p">));</span>
 
 <span class="c">% Import from Wannier90 seedname.win file</span>
 <span class="n">qe</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">QE</span><span class="p">.</span><span class="n">fromWIN</span><span class="p">(</span><span class="s">&#39;examples/MgB2/wannier90/MgB2.win&#39;</span><span class="p">);</span>

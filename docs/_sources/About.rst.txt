@@ -15,3 +15,4 @@ VPHMAT can be used to:
 - Visualize phonon modes
 - Plot band structure and DOS
 - Plot Fermi surface
+- Intergrate with structure prediction tools
