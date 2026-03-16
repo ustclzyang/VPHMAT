@@ -1,0 +1,66 @@
+#!/bin/bash
+
+# Copyright (c) 2025 Lizhou Yang
+# MIT License
+# usage: awkqe SECTION PARAM VALUE INPUT_FILE [OUTPUT_FILE]
+# for example: awkqe SYSTEM occupations "'smearing'" relax.in
+# for example: awkqe SYSTEM occupations "'smearing'" relax.in relax_new.in
+
+if [ $# -lt 4 ]; then
+    echo "错误：至少需要4个参数" >&2
+    echo "新用法: $0 SECTION PARAM VALUE INPUT_FILE [OUTPUT_FILE]" >&2
+    echo "示例: $0 SYSTEM occupations \"'smearing'\" relax.in" >&2
+    echo "示例: $0 SYSTEM smearing \"'cold'\" relax.in relax_new.in" >&2
+    exit 1
+fi
+
+section="$1"
+param="$2"
+value="$3"
+input_file="$4"
+output_file="${5:-$input_file}"  # 如果未指定输出文件，则使用输入文件
+
+# 使用临时文件处理
+tmp_file=$(mktemp)
+
+awk -v section="$section" -v param="$param" -v value="$value" '
+BEGIN {
+    in_target = 0
+    modified = 0
+    indent = ""
+}
+
+match($0, /^[[:space:]]*&([^[:space:]]+)/, arr) {
+    current_section = tolower(arr[1])
+    in_target = (current_section == tolower(section)) ? 1 : 0
+    print
+    next
+}
+
+in_target && /^[[:space:]]*\// {
+    if (!modified) {
+        printf "%s%s = %s\n", indent, param, value
+    }
+    in_target = 0
+    modified = 0
+    print
+    next
+}
+
+in_target {
+    # 转义 param 里的所有正则特殊字符
+    escaped_param = param
+    gsub(/[()]/, "\\\\&", escaped_param)
+
+    if (match($0, "^([[:space:]]*)(!?[[:space:]]*)" escaped_param "[[:space:]]*=[[:space:]]*", arr)) {
+        indent = arr[1]
+        printf "%s%s = %s\n", indent, param, value  # 输出原 param（不转义）
+        modified = 1
+        next
+    }
+}
+{ print }
+' "$input_file" > "$tmp_file"
+
+# 移动临时文件到目标位置
+mv "$tmp_file" "$output_file"
