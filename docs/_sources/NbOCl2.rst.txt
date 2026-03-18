@@ -93,7 +93,7 @@ Modify atom radius, color and bond width
    % change Nb atom radius to 1.6
    v.atoms.radii(Nb_idx)=1.6;
    % change Nb atom color to grey
-   v.atoms.colors(Nb_idx,:)=repmat([0.8 0.8 0.8],sum(Nb_idx),1);
+   v.atoms.color(Nb_idx,:)=repmat([0.8 0.8 0.8],sum(Nb_idx),1);
    % change bond width to 0.15
    v.bonds.radius=0.15;
 
